@@ -1,0 +1,77 @@
+<ion-content class="ion-padding"> 
+  <div class="form-container">
+
+    <h2 class="form-title">User Form</h2>
+    <p class="form-subtitle">Please fill in the details below</p>
+
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+
+      <!-- Name -->
+      <ion-item class="input-item" [class.invalid]="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+        <ion-input formControlName="name" type="text"
+                   label="Full Name *"
+                   labelPlacement="floating"
+                   placeholder="Enter your name">
+        </ion-input>
+      </ion-item>
+      <p class="error-msg" *ngIf="userForm.get('name')?.invalid && userForm.get('name')?.touched">
+        Name is required
+      </p>
+
+      <!-- Email -->
+      <ion-item class="input-item" [class.invalid]="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        <ion-input formControlName="email" type="email"
+                   label="Email Address *"
+                   labelPlacement="floating"
+                   placeholder="Enter your email">
+        </ion-input>
+      </ion-item>
+      <p class="error-msg" *ngIf="userForm.get('email')?.invalid && userForm.get('email')?.touched">
+        Enter a valid email
+      </p>
+
+      <!-- Address -->
+      <ion-item class="input-item" [class.invalid]="userForm.get('address')?.invalid && userForm.get('address')?.touched">
+        <ion-label position="stacked">Address *</ion-label>
+        <textarea formControlName="address"
+                  placeholder="Enter your address"
+                  rows="3"
+                  class="native-textarea">
+        </textarea>
+      </ion-item>
+      <p class="error-msg" *ngIf="userForm.get('address')?.invalid && userForm.get('address')?.touched">
+        Address is required
+      </p>
+
+      <!-- Phone -->
+      <ion-item class="input-item">
+        <ion-input formControlName="phone" type="tel"
+                   label="Phone Number (Optional)"
+                   labelPlacement="floating"
+                   placeholder="Enter your phone number">
+        </ion-input>
+      </ion-item>
+
+      <!-- Buttons -->
+      <div class="btn-group">
+      <ion-button expand="block" type="button" fill="outline" color="danger" (click)="onSubmit()">
+          Submit
+        </ion-button>
+        <ion-button expand="block" type="button" fill="outline" color="danger" (click)="onReset()">
+          Reset
+        </ion-button>
+      </div>
+
+    </form>
+  </div>
+
+  <ion-toast
+    [isOpen]="showToast"
+    message="✅ Form Submitted Successfully!"
+    [duration]="3000"
+    position="top"
+    color="success"
+    (didDismiss)="showToast = false">
+  </ion-toast>
+
+</ion-content>
